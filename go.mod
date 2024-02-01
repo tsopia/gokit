@@ -1,3 +1,3 @@
-module gokit
+module github.com/tsopia/gokit.git
 
-go 1.18
+go 1.21
