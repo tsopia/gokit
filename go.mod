@@ -1,4 +1,4 @@
-module github.com/tsopia/gokit.git
+module github.com/tsopia/gokit
 
 go 1.21
 
