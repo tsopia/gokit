@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/tsopia/gokit/config"
+	"os"
 )
 
 func main() {
@@ -16,4 +17,6 @@ func main() {
 	// 使用配置
 	value := config.GetString("key")
 	fmt.Printf("Value from config: %s\n", value)
+	env := os.Getenv("GO_ENV")
+	fmt.Printf("Value from config: %s\n", env)
 }
