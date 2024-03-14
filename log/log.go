@@ -33,11 +33,6 @@ func init() {
 	}
 }
 
-type ContextWithKeys struct {
-	context.Context
-	keys []string
-}
-
 func Info(ctx context.Context) *zerolog.Event {
 	event := logger.Info()
 	// 从context.Context中获取"trace"的值
@@ -48,9 +43,7 @@ func Info(ctx context.Context) *zerolog.Event {
 	// 输出日志
 	return event
 }
-func Err(err error) {
-	logger.Err(err)
-}
+
 func Error(ctx context.Context) *zerolog.Event {
 	event := logger.Error()
 	// 从context.Context中获取"trace"的值
