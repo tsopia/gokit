@@ -1,7 +1,9 @@
 package example
 
 import (
+	"context"
 	"fmt"
+	"github.com/tsopia/gokit/log"
 	"github.com/tsopia/gokit/xhttp"
 	"testing"
 )
@@ -9,7 +11,11 @@ import (
 func TestNewHttpClient(t *testing.T) {
 
 	var result MyStruct
-	err := xhttp.Get("http://example.com1", &result)
+	ctx := log.With().
+		Str("request_id", "123").
+		Str("user_id", "abc").
+		Logger().WithContext(context.Background())
+	err := xhttp.Get(ctx, "https://api.oioweb.cn/api/weather/GetWeather", &result)
 	if err != nil {
 		fmt.Println("Error:", err)
 		return

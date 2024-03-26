@@ -2,6 +2,7 @@ package example
 
 import (
 	"context"
+	"fmt"
 	"github.com/tsopia/gokit/log"
 	"testing"
 )
@@ -9,7 +10,7 @@ import (
 func TestLogger(t *testing.T) {
 	//zerolog.SetGlobalLevel(zerolog.InfoLevel)
 	//logger := zerolog.New(os.Stderr)
-	log.NewLog()
+	log.InitLog()
 	// 添加请求ID和用户ID到logger
 	ctx := log.With().
 		Str("request_id", "123").
@@ -23,7 +24,12 @@ func TestLogger(t *testing.T) {
 
 	// 在后续的代码中，我们可以通过context获取到logger
 
-	log.Info(ctx).Msg("hello world")
+	log.Info(ctx).Msg("info")
+	log.Debug(ctx).Msg("Debug")
+	log.Warn(ctx).Msg("Warn")
+	log.Error(ctx).Err(fmt.Errorf("errorsssss")).Msg("error")
+	log.Fatal(ctx).Err(fmt.Errorf("fatalerrorsssss")).Msg("fatal")
+	log.Panic(ctx).Err(fmt.Errorf("panicerrorsssss")).Msg("panic")
 
 }
 
