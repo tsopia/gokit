@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/go-resty/resty/v2"
 	"github.com/rs/zerolog"
+	"github.com/tsopia/gokit/conf"
 	"github.com/tsopia/gokit/log"
 	"time"
 )
@@ -39,6 +40,9 @@ func (l *RestyLoggerAdapter) Infof(format string, v ...interface{}) {
 func Client() *resty.Client {
 	client := resty.New()
 	//client.SetLogger(zerologClient())
+	if conf.DefaultConf.LogLevel.GoResetDebug != nil && *conf.DefaultConf.LogLevel.GoResetDebug {
+		client.SetDebug(true)
+	}
 
 	client.SetRetryCount(3) // 设置失败重试次数
 	// 这里可以设置一些默认的配置，例如超时时间、重试次数等
@@ -52,7 +56,7 @@ func Client() *resty.Client {
 		}
 		return nil
 	})
-	client.SetDebug(true)
+
 	return client
 }
 

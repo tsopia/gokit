@@ -15,7 +15,8 @@ func TestNewHttpClient(t *testing.T) {
 		Str("request_id", "123").
 		Str("user_id", "abc").
 		Logger().WithContext(context.Background())
-	err := xhttp.Get(ctx, "https://api.oioweb.cn/api/weather/GetWeather", &result)
+	err := xhttp.Get(ctx, "https://chat.openai.co1m/c/c60d0aec-3688-4683-a739-cf4428a7a537", &result)
+	//err := xhttp.Get(ctx, "https://api.oioweb.cn/api/weather/GetWeather", &result)
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
