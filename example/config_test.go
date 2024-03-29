@@ -13,6 +13,7 @@ func TestInitConfig(t *testing.T) {
 	//os.Setenv("HOST", "DDD")
 	//os.Setenv("PATH", "pass")
 	director, _ := os.Getwd()
+	t.Logf(director)
 	vcm := &conf.ViperConfigManager{
 		ConfigPath: director,
 		ConfigType: "yaml",
