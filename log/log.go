@@ -2,14 +2,31 @@ package log
 
 import (
 	"context"
+	"fmt"
 	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 	"os"
+	"strings"
+	"time"
 )
 
 var Logger *zerolog.Logger
 
 func InitLog() {
-	l := zerolog.New(os.Stderr).With().Timestamp().Logger()
+	output := zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.RFC3339}
+	output.FormatLevel = func(i interface{}) string {
+		return strings.ToUpper(fmt.Sprintf("| %-6s|", i))
+	}
+	output.FormatMessage = func(i interface{}) string {
+		return fmt.Sprintf("msg: %s", i)
+	}
+	output.FormatFieldName = func(i interface{}) string {
+		return fmt.Sprintf("%s:", i)
+	}
+	output.FormatFieldValue = func(i interface{}) string {
+		return strings.ToUpper(fmt.Sprintf("%s", i))
+	}
+	l := log.Output(output).With().Timestamp().Logger()
 	//l.Level(zerolog.DebugLevel)
 	Logger = &l
 }

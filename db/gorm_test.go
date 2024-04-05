@@ -2,6 +2,7 @@ package db
 
 import (
 	"github.com/stretchr/testify/assert"
+	"github.com/tsopia/gokit/model"
 	"github.com/tsopia/gokit/xerrors"
 	"testing"
 	"time"
@@ -9,7 +10,7 @@ import (
 
 func TestMySQLClient(t *testing.T) {
 	// 设置 MySQL 配置信息
-	config := MySQLConfig{
+	config := model.MysqlConf{
 		Host:              "localhost",
 		Port:              3306,
 		Username:          "root",
@@ -24,9 +25,9 @@ func TestMySQLClient(t *testing.T) {
 	}
 
 	// 创建 MySQL 客户端
-	client, err := NewClient(config)
+	err := InitDbClient(config)
 	defer func() {
-		if err := client.Close(); err != nil {
+		if err := DbClient.Close(); err != nil {
 			t.Errorf("Failed to close MySQL client: %v", err)
 		}
 	}()
@@ -35,12 +36,12 @@ func TestMySQLClient(t *testing.T) {
 	assert.Nil(t, err)
 
 	// 测试 MySQL 客户端的 Ping 方法
-	err = client.Ping()
+	err = DbClient.Ping()
 	assert.Nil(t, err)
 
 	// 在此添加其他需要测试的操作，例如执行查询、插入等
 	// 测试创建表、插入数据和删除表
-	err = testCreateInsertDelete(client)
+	err = testCreateInsertDelete(DbClient)
 	assert.Nil(t, err)
 	// 休眠一段时间，以便在关闭连接之前观察连接池的行为
 	time.Sleep(5 * time.Second)

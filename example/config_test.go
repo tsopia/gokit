@@ -3,15 +3,16 @@ package example
 import (
 	"github.com/spf13/viper"
 	"github.com/tsopia/gokit/conf"
+	"github.com/tsopia/gokit/model"
 	"os"
 	"testing"
 )
 
 func TestInitConfig(t *testing.T) {
 	// 初始化 ViperConfigManager
-	//os.Setenv("PORT", "8080")
-	//os.Setenv("HOST", "DDD")
-	//os.Setenv("PATH", "pass")
+	os.Setenv("PORT", "8080")
+	os.Setenv("HOST", "DDD")
+	os.Setenv("PATH", "pass")
 	director, _ := os.Getwd()
 	t.Logf(director)
 	vcm := &conf.ViperConfigManager{
@@ -19,16 +20,15 @@ func TestInitConfig(t *testing.T) {
 		ConfigType: "yaml",
 		ConfigName: "config",
 	}
-
-	_ = vcm.InitConfig()
-	configStruct := conf.DefaultConf
+	c := &model.ManagerConf{}
+	_ = vcm.InitConfig(c)
+	configStruct := c
 	t.Log(configStruct)
 	t.Log(configStruct.Port)
-	t.Log(*configStruct.Mysql.Host)
-	t.Log(*configStruct.Mysql.Host)
+	t.Log(c.Mysql.Host)
 	t.Log(viper.GetString("mysql.host"))
 	t.Log(viper.GetString("Port"))
-	t.Log(viper.GetString("serverName"))
+	t.Log(viper.GetString("PATH"))
 
 	// 现在可以通过managerConf.Mysql.Host访问host的值
 }

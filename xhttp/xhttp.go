@@ -5,10 +5,18 @@ import (
 	"fmt"
 	"github.com/go-resty/resty/v2"
 	"github.com/rs/zerolog"
-	"github.com/tsopia/gokit/conf"
+	"github.com/spf13/viper"
 	"github.com/tsopia/gokit/log"
 	"time"
 )
+
+// 定义单例模式的Client
+var singletonClient *resty.Client
+
+// 初始化Client，放在包初始化时执行
+func init() {
+	singletonClient = Client()
+}
 
 type RestyLoggerAdapter struct {
 	zerolog.Logger
@@ -39,8 +47,9 @@ func (l *RestyLoggerAdapter) Infof(format string, v ...interface{}) {
 // Client returns a new resty.Client with some default configuration.
 func Client() *resty.Client {
 	client := resty.New()
-	//client.SetLogger(zerologClient())
-	if conf.DefaultConf.LogLevel.GoResetDebug != nil && *conf.DefaultConf.LogLevel.GoResetDebug {
+	client.SetLogger(zerologClient())
+
+	if viper.GetBool("GO_RESET_DEBUG") {
 		client.SetDebug(true)
 	}
 
@@ -62,7 +71,7 @@ func Client() *resty.Client {
 
 // Get sends a GET request to the specified URL and deserializes the response into v.
 func Get(ctx context.Context, url string, v interface{}) error {
-	resp, err := Client().R().SetContext(ctx).SetResult(v).Get(url)
+	resp, err := singletonClient.R().SetContext(ctx).SetResult(v).Get(url)
 	if err != nil {
 		return err
 	}
@@ -74,7 +83,7 @@ func Get(ctx context.Context, url string, v interface{}) error {
 
 // Post sends a POST request to the specified URL with the provided body and deserializes the response into v.
 func Post(ctx context.Context, url string, body interface{}, v interface{}) error {
-	resp, err := Client().R().SetContext(ctx).SetBody(body).SetResult(v).Post(url)
+	resp, err := singletonClient.R().SetContext(ctx).SetBody(body).SetResult(v).Post(url)
 	if err != nil {
 		return err
 	}

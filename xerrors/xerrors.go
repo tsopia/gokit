@@ -56,6 +56,34 @@ const (
 	// 其他网络相关错误代码可以在这里添加
 )
 
+// 定义资源操作过程中可能遇到的错误类型
+const (
+	ErrResourceNotFound                                        = iota + 8001 // 资源未找到
+	ErrResourceAlreadyExists                                                 // 资源已存在
+	ErrResourceInvalid                                                       // 资源无效
+	ErrResourceNotAuthorized                                                 // 无权限访问资源
+	ErrResourceNotAllowed                                                    // 资源不允许操作
+	ErrResourceNotImplemented                                                // 资源未实现
+	ErrResourceNotSupported                                                  // 资源不被支持
+	ErrResourceNotAvailable                                                  // 资源不可用
+	ErrResourceNotAvailableInThisRegion                                      // 该区域中资源不可用
+	ErrResourceNotAvailableInThisZone                                        // 该区域中资源不可用
+	ErrResourceNotAvailableInThisEnvironment                                 // 该环境中资源不可用
+	ErrResourceNotAvailableInThisEnvironmentType                             // 该环境类型中资源不可用
+	ErrResourceNotAvailableInThisEnvironmentVersion                          // 该环境版本中资源不可用
+	ErrResourceNotAvailableInThisEnvironmentVersionType                      // 该环境版本类型中资源不可用
+	ErrResourceNotAvailableInThisEnvironmentVersionTypeVersion               // 该环境版本类型版本中资源不可用
+)
+
+// 文件不存在的err
+const ErrFileNotFound = 4001
+
+// EnvBindingErrorCode 定义绑定环境变量失败的错误码。
+const (
+	ErrEnvBinding = iota + 5001
+	ErrUnmarshal
+)
+
 // Error represents a unified error type.
 type Error struct {
 	Code    int    // Error code
