@@ -52,9 +52,10 @@ func TestErrorUnwrap(t *testing.T) {
 
 	// 使用 Wrap 函数将原始错误包装成新的 Error 实例
 	err := Wrap(originalError, 6002, "Database query failed")
-
+	unwrapped := errors.Unwrap(err)
+	t.Log(unwrapped)
 	// 使用 Unwrap 方法检查原始错误是否正确返回
-	if unwrapped := errors.Unwrap(err); unwrapped != originalError {
+	if unwrapped != originalError {
 		t.Error("Expected Unwrap to return original error")
 	}
 }
