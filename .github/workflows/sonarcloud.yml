@@ -41,6 +41,7 @@ permissions:
 jobs:
   Analysis:
     runs-on: ubuntu-latest
+    environment: dev
 
     steps:
       - name: Analyze with SonarCloud
