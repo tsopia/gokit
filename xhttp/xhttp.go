@@ -6,7 +6,7 @@ import (
 	"github.com/go-resty/resty/v2"
 	"github.com/rs/zerolog"
 	"github.com/spf13/viper"
-	"github.com/tsopia/gokit/log"
+	"github.com/tsopia/gokit/xlog"
 	"time"
 )
 
@@ -23,7 +23,7 @@ type RestyLoggerAdapter struct {
 }
 
 func zerologClient() *RestyLoggerAdapter {
-	logger := log.Logger
+	logger := xlog.Logger
 	return &RestyLoggerAdapter{*logger}
 }
 
@@ -61,7 +61,7 @@ func Client() *resty.Client {
 
 	client.OnAfterResponse(func(c *resty.Client, r *resty.Response) error {
 		if r.IsError() {
-			log.Error(r.Request.Context()).Msgf("Request to %s failed with status %s\"", r.Request.URL, r.Status())
+			xlog.Error(r.Request.Context()).Msgf("Request to %s failed with status %s\"", r.Request.URL, r.Status())
 		}
 		return nil
 	})

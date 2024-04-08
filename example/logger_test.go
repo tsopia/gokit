@@ -3,16 +3,16 @@ package example
 import (
 	"context"
 	"fmt"
-	"github.com/tsopia/gokit/log"
+	"github.com/tsopia/gokit/xlog"
 	"testing"
 )
 
 func TestLogger(t *testing.T) {
 	//zerolog.SetGlobalLevel(zerolog.InfoLevel)
 	//logger := zerolog.New(os.Stderr)
-	log.InitLog()
+	xlog.InitLog()
 	// 添加请求ID和用户ID到logger
-	ctx := log.With().
+	ctx := xlog.With().
 		Str("request_id", "123").
 		Str("user_id", "abc").
 		Logger().WithContext(context.Background())
@@ -24,12 +24,12 @@ func TestLogger(t *testing.T) {
 
 	// 在后续的代码中，我们可以通过context获取到logger
 
-	log.Info(ctx).Msg("info")
-	log.Debug(ctx).Msg("Debug")
-	log.Warn(ctx).Msg("Warn")
-	log.Error(ctx).Err(fmt.Errorf("errorsssss")).Msg("error")
-	log.Fatal(ctx).Err(fmt.Errorf("fatalerrorsssss")).Msg("fatal")
-	log.Panic(ctx).Err(fmt.Errorf("panicerrorsssss")).Msg("panic")
+	xlog.Info(ctx).Msg("info")
+	xlog.Debug(ctx).Msg("Debug")
+	xlog.Warn(ctx).Msg("Warn")
+	xlog.Error(ctx).Err(fmt.Errorf("errorsssss")).Msg("error")
+	xlog.Fatal(ctx).Err(fmt.Errorf("fatalerrorsssss")).Msg("fatal")
+	xlog.Panic(ctx).Err(fmt.Errorf("panicerrorsssss")).Msg("panic")
 
 }
 

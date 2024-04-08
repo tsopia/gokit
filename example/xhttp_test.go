@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/tsopia/gokit/conf"
-	"github.com/tsopia/gokit/log"
 	"github.com/tsopia/gokit/xhttp"
+	"github.com/tsopia/gokit/xlog"
 	"os"
 	"testing"
 )
@@ -26,7 +26,7 @@ func TestNewHttpClient(t *testing.T) {
 	//
 	//t.Logf("config: %+v", os.Getenv("GO_RESET_DEBUG"))
 	var result MyStruct
-	ctx := log.With().
+	ctx := xlog.With().
 		Str("request_id", "123").
 		Str("user_id", "abc").
 		Logger().WithContext(context.Background())
