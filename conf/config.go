@@ -2,11 +2,26 @@ package conf
 
 import (
 	"github.com/spf13/viper"
+	"github.com/tsopia/gokit/model"
 	"github.com/tsopia/gokit/xerrors"
 	"log"
+	"os"
 	"reflect"
 	"strings"
 )
+
+var DefaultConf = &model.ManagerConf{}
+
+func init() {
+	director, _ := os.Getwd()
+	vcm := &ViperConfigManager{
+		ConfigPath: director,
+		ConfigType: "yaml",
+		ConfigName: "config",
+	}
+	_ = vcm.InitConfig(DefaultConf)
+
+}
 
 // ViperConfigManager 是基于viper实现的配置管理器，负责初始化和管理配置文件
 type ViperConfigManager struct {

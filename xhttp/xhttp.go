@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/go-resty/resty/v2"
 	"github.com/rs/zerolog"
-	"github.com/spf13/viper"
+	"github.com/tsopia/gokit/conf"
 	"github.com/tsopia/gokit/xlog"
 	"time"
 )
@@ -49,7 +49,7 @@ func Client() *resty.Client {
 	client := resty.New()
 	client.SetLogger(zerologClient())
 
-	if viper.GetBool("GO_RESET_DEBUG") {
+	if conf.DefaultConf.LogLevel.GoResetDebug {
 		client.SetDebug(true)
 	}
 

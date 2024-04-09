@@ -29,6 +29,7 @@ func TestInitConfig(t *testing.T) {
 	t.Log(viper.GetString("mysql.host"))
 	t.Log(viper.GetString("Port"))
 	t.Log(viper.GetString("PATH"))
+	t.Log(viper.GetString("GO.RESET.DEBUG"))
 
 	// 现在可以通过managerConf.Mysql.Host访问host的值
 }

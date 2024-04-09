@@ -17,3 +17,6 @@ Mysql:
 LogLevel:
   GoResetDebug: true
   LogLevel: debug
+Go:
+  Reset:
+    Debug: true
