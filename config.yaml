@@ -1,1 +1,19 @@
-key: aaa
+ServerName: pdrland
+Port: 8088
+GrpcPort: 2111
+GrpcServerName: pdrland
+Mysql:
+  Host: localhost
+  Port: 3306
+  Username: root
+  Password: 123456
+  Database: pdrland
+  MaxIdleConn: 10
+  MaxOpenConn: 100
+  IdleTimeout: 30
+  MaxLifetime: 0
+  HealthCheckPeriod: 10
+  MaxIdleClosed: true
+LogLevel:
+  GoResetDebug: true
+  LogLevel: debug
