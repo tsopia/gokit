@@ -10,7 +10,7 @@ import (
 
 func TestMySQLClient(t *testing.T) {
 	// 设置 MySQL 配置信息
-	config := model.MysqlConf{
+	config := &model.MysqlConf{
 		Host:              "localhost",
 		Port:              3306,
 		Username:          "root",
