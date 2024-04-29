@@ -1,8 +1,13 @@
 package gin
 
 import (
+	"context"
 	"errors"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
