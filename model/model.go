@@ -4,8 +4,8 @@ import "time"
 
 // ManagerConf 是配置管理器的结构体，包含MySQL和日志级别配置
 type ManagerConf struct {
-	Mysql          *MysqlConf
-	LogLevel       *LogLevelConf
+	Mysql          MysqlConf
+	LogLevel       LogLevelConf
 	Port           int
 	GrpcPort       int
 	GrpcServerName string
